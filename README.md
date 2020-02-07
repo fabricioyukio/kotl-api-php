@@ -62,7 +62,9 @@ composer install
 First of all you must make an ***.env*** file, by copying **.env.example** file:
 
 ```bash
+# copy file
 cp .env.example .env
+# generate key
 php artisan key:generate
 ```
 
@@ -117,6 +119,32 @@ PUSHER_APP_CLUSTER=
 MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 ```
+
+##### Macte animo!
+
+You are almost there!
+
+#### Run migrations and seeds
+
+```bash
+# migrations to create tables
+php artisan migrate
+# seeds to initial population of seeds
+php artisan db:seed
+```
+
+##### Reseting DB
+
+You might be running experimentations with the DB, it might get some inconsistencies. Whenever it happens I would recommend you to reset database*.
+
+Anyways. Should ever need to reset the database run:
+```bash
+php artisan migrate:refresh --seed
+```
+
+> Remember that it's not a production ready project, nor a state of art boilerplate...
+
+
 
 ## Security Vulnerabilities and bugs
 
