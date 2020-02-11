@@ -1,6 +1,5 @@
 # King of the Lunch API
 
-
 ## About
 
 This repository is a part of a _show off_ project named "**King of the Lunch**"
@@ -18,8 +17,6 @@ A given applicant must apply for the elections by registering his **name** and *
 ## Setting up
 
 As previously mentioned, this project is part of major project called "**King of the Lunch**". Please take a look at docker project : [Docker Infrastructure](https://github.com/fabricioyukio/kotl-docker) before you start.
-
-Also check [Web](https://github.com/fabricioyukio/kotl-web) - A ReactJS app to work as a GUI/Frontend for this API.
 
 ### With or without Docker Infrastructure?
 
@@ -97,6 +94,7 @@ REDIS_HOST=127.0.0.1
 REDIS_PASSWORD=null
 REDIS_PORT=6379
 
+# For this example, I've used Mailtrap.io
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.mailtrap.io
 MAIL_PORT=2525
@@ -155,15 +153,18 @@ If you ever discover a security vulnerability or bug within this project, please
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Made with
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
-<p align="center">6.1.4</p>
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+
+[![vscode][1]][2]
+
+[1]: public/assets/vscode_icon.svg
+[2]: https://code.visualstudio.com/ "Get VSCode"
 
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+
+## The KotL Project Repositories
+
+* [kotl-docker](https://github.com/fabricioyukio/kotl-docker) - A minimal docker infrastructure for Api.
+* [kotl-api-php](https://github.com/fabricioyukio/kotl-api-php) - Laravel API for the project.
+* [kotl-web](https://github.com/fabricioyukio/kotl-web) - a responsive Web App that will run as main frontend for the project.

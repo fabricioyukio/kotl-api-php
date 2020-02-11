@@ -16,6 +16,7 @@ class CreateElectionsTable extends Migration
         Schema::create('elections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->date('voting_day');
         });
     }
 
