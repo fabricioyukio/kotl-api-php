@@ -20,9 +20,9 @@ class SendValidateApplicantEmail implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user_id)
     {
-        //
+        $this->user_id = $user_id;
     }
 
     /**
