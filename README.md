@@ -18,33 +18,38 @@ A given applicant must apply for the elections by registering his **name** and *
 
 As previously mentioned, this project is part of major project called "**King of the Lunch**". Please take a look at docker project : [Docker Infrastructure](https://github.com/fabricioyukio/kotl-docker) before you start.
 
-### With or without Docker Infrastructure?
+### External API's
 
-The "Docker Infrastructure" project have been made as a way of providing a development environment in order to standardize the process of developing independent of your current OS and provide a quick '*hands-on*' on coding!
+To ease our development we will integrate some services from third parties.
 
-Without the "Docker Infrastructure" project, you have to provide all the required dependencies (php 7.2, Laravel 6, Redis, MySQL, etc...) in order to make it happen.
+#### Calendario.com.br
 
-#### With Docker Infrastructure
+Utilizaremos o serviço que informa os feriados nacionais por cidade. Para obter as credenciais de acesso, siga o link:
+http://www.calendario.com.br/api_feriados_municipais_estaduais_nacionais.php
 
-In your favorite shell (iterm, zsh, git-gui,...) just prefix all commands with "**docker exec api -it {your_command}**". Example:
+#### Mailtrap.io
 
-```bash
-composer install
-```
+Mailtrap provides a free use of their for development purposes. Just go to https://mailtrap.io to get you keys!
 
-You should do as:
+#### Pusher
 
-```bash
-# it might appear a little more cumbersome, but you might just run commands
-# from any available shell window
-docker exec api -it composer install
-```
+Pusher enable us to send push notifications to the front-end App if such is capable.
 
-#### Without Docker Infrastructure
+#### Redis
 
-You will need to navigate to within **application directory** in the server instance (VM, Remote server, Vagrant Machine) order to run commands. 
+We use Redis queues to provide scalability.
 
-### Getting started
+Some non-urgent actions are enqueued so that application avoids _"hicups"_ :)
+
+### Using kotl-docker
+
+If you are using the [Docker Infrastructure](https://github.com/fabricioyukio/kotl-docker), you may skip the rest of this section.
+
+Except that you still need to adjust the **.env** file from this project.
+
+### Setup commands
+
+Navigate to this project directory using your favorite shell and follow the instructions...
 
 #### Vendor modules
 
@@ -67,58 +72,7 @@ php artisan key:generate
 
 Then edit the newly created **.env** file, adjusting parameters where needed.
 
-```ini
-# /.env
-APP_NAME=kotl-api
-APP_ENV=local
-APP_KEY=SOME_HASH_CREATED
-APP_DEBUG=true
-APP_URL=http://localhost
-
-LOG_CHANNEL=stack
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=check_on_docker_file
-DB_USERNAME=check_on_docker_file
-DB_PASSWORD=check_on_docker_file
-
-BROADCAST_DRIVER=log
-CACHE_DRIVER=file
-QUEUE_CONNECTION=sync
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
-
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-# For this example, I've used Mailtrap.io
-MAIL_DRIVER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS=null
-MAIL_FROM_NAME="${APP_NAME}"
-
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=
-
-PUSHER_APP_ID=
-PUSHER_APP_KEY=
-PUSHER_APP_SECRET=
-PUSHER_APP_CLUSTER=
-
-MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
-MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
-```
-
-##### Macte animo!
+#### Macte animo
 
 You are almost there!
 
@@ -131,6 +85,12 @@ php artisan migrate
 php artisan db:seed
 ```
 
+Or simply run
+
+```bash
+php artisan migrate:fresh --seed
+```
+
 ##### Reseting DB
 
 You might be running experimentations with the DB, it might get some inconsistencies. Whenever it happens I would recommend you to reset database*.
@@ -140,9 +100,21 @@ Anyways. Should ever need to reset the database run:
 php artisan migrate:refresh --seed
 ```
 
+#### Start laravel server
+
+Run this command only if your are not using the Docker infrastructure.
+
+```bash
+php artisan serve
+```
+
+Start queue
+
+```bash
+php artisan queue:listen
+```
+
 > Remember that it's not a production ready project, nor a state of art boilerplate...
-
-
 
 ## Security Vulnerabilities and bugs
 

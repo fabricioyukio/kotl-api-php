@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePeopleTable extends Migration
+class CreateCandidatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreatePeopleTable extends Migration
      */
     public function up()
     {
-        Schema::create('people', function (Blueprint $table) {
+        Schema::create('contenders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('email',120);
+            $table->string('name',60);
+            $table->string('token',60);
+            $table->enum('status',['CREATED','ACTIVE','SUSPENDED','BANNED']);
             $table->timestamps();
+            $table->unique('email','one_contender_per_email');
         });
     }
 
@@ -26,6 +31,6 @@ class CreatePeopleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('people');
+        Schema::dropIfExists('candidates');
     }
 }

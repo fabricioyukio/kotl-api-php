@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVotesTable extends Migration
+class CreateReignsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,19 @@ class CreateVotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('votes', function (Blueprint $table) {
+        Schema::create('reigns', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('election_id');
-            $table->unsignedBigInteger('contender_id');
-            $table->string('email',120);
+            $table->string('king');
+            $table->string('king_avatar');
+            $table->string('arrogator');
+            $table->string('arrogator_avatar');
+            $table->enum('type',['DAY','WEEK']);
+            $table->datetime('reign_from');
+            $table->datetime('reign_to');
             $table->timestamps();
+
             $table->foreign('election_id')->references('id')->on('elections');
-            $table->foreign('contender_id')->references('id')->on('contenders');
-            $table->unique(['email','election_id'],'one_email_one_vote_per_election');
         });
     }
 
@@ -32,6 +36,6 @@ class CreateVotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('votes');
+        Schema::dropIfExists('reigns');
     }
 }
