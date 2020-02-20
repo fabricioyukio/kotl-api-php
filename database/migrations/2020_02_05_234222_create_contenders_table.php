@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Ramsey\Uuid\Uuid;
 
 class CreateContendersTable extends Migration
 {
@@ -17,10 +18,12 @@ class CreateContendersTable extends Migration
             $table->bigIncrements('id');
             $table->string('email',120);
             $table->string('name',60);
-            $table->string('token',60);
-            $table->enum('status',['CREATED','ACTIVE','SUSPENDED','BANNED']);
+            $table->enum('gender',['FEMALE','MALE','NOT GIVEN']);
+            $table->uuid('token',36)->default(Uuid::uuid4());
+            $table->enum('status',['CREATED','ACTIVE','SUSPENDED','CANCELLED']);
             $table->timestamps();
             $table->unique('email','one_contender_per_email');
+            $table->index('token');
         });
     }
 
