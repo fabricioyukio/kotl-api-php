@@ -14,9 +14,4 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::prefix('v1')->group(function(){
-    Route::get('contenders', 'ContenderController@active');
-    Route::get('contender/{id}/{token}', 'ContenderController@confirm');
-    Route::get('contender/{id}', 'ContenderController@get');
-    Route::post('contender', 'ContenderController@create');
-});
+
