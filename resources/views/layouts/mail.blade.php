@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>App Name - @yield('title')</title>
+        <title>Rei do Almoço - @yield('title')</title>
     </head>
     <body>
         <div class="container">

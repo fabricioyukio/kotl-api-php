@@ -7,14 +7,14 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
 use Mail;
-use App\Mail\ValidateApplicant;
+use App\Mail\ValidateContenderMail;
+use App\Contender;
 
-class SendValidateApplicantEmail implements ShouldQueue
+class SendValidateContenderEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+    public $user_id;
     /**
      * Create a new job instance.
      *
@@ -32,7 +32,8 @@ class SendValidateApplicantEmail implements ShouldQueue
      */
     public function handle()
     {
-        $email = new ValidateApplicant();
-        Mail::to('info@larashout.com')->send($email);
+        $contender = Contender::where('id',$this->user_id)->first();
+        $email = new ValidateContenderMail($contender);
+        Mail::to($contender->email)->send($email);
     }
 }

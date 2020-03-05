@@ -6,18 +6,20 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Contender;
 
-class WelcomeContender extends Mailable
+class ValidateContenderMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $contender;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($contender)
     {
+        $this->contender = $contender;
         //
     }
 
@@ -28,6 +30,6 @@ class WelcomeContender extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('mail.applicant')->with(['contender'=>$this->contender]);
     }
 }
