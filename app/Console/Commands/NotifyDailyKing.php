@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class ShowVoteCount extends Command
+class NotifyDailyKing extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'kotl:pushvotes';
+    protected $signature = 'kotl:king:day';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Broadcasts votes for current Election';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.

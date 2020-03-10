@@ -17,11 +17,12 @@ class CreateVotesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('election_id');
             $table->unsignedBigInteger('contender_id');
-            $table->string('email',120);
+            $table->string('voter_email',120);
+            $table->enum('status',['UNCONFIRMED','CONFIRMED','ACCOUNTED','REJECTED'])->default('UNCONFIRMED');
             $table->timestamps();
             $table->foreign('election_id')->references('id')->on('elections');
             $table->foreign('contender_id')->references('id')->on('contenders');
-            $table->unique(['email','election_id'],'one_email_one_vote_per_election');
+            $table->unique(['voter_email','election_id'],'one_email_one_vote_per_election');
         });
     }
 

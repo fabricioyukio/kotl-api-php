@@ -3,22 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Carbon\Carbon;
 
-class CountVotes extends Command
+class CreateDailyElection extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'kotl:count';
+    protected $signature = 'kotl:election:create:daily';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Counts votes given to applicants';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -37,6 +38,6 @@ class CountVotes extends Command
      */
     public function handle()
     {
-        //
+        $today = now();
     }
 }

@@ -21,10 +21,7 @@ class CreateReignsTable extends Migration
             $table->string('arrogator');
             $table->string('arrogator_avatar');
             $table->enum('type',['DAY','WEEK']);
-            $table->datetime('reign_from');
-            $table->datetime('reign_to');
             $table->timestamps();
-
             $table->foreign('election_id')->references('id')->on('elections');
         });
     }

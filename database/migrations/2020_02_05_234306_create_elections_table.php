@@ -16,10 +16,11 @@ class CreateElectionsTable extends Migration
         Schema::create('elections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->integer('week');
-            $table->integer('day');
-            $table->datetime('starts_at');
-            $table->datetime('ends_at');
+            $table->enum('status',['CREATED','OPEN','CLOSED'])->default('CREATED');
+            $table->enum('type',['DAILY','WEEKLY'])->default('DAILY');
+            $table->date('available_at');
+            $table->datetime('started_at')->nullable();
+            $table->datetime('ended_at')->nullable();
         });
     }
 

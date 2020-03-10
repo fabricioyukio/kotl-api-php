@@ -28,7 +28,7 @@ class ContenderController extends Controller
                 'message'=>'Here comes a new contender!',
                 'contender'=>$new_contender
             ];
-            dispatch(new SendValidateContenderEmailJob($new_contender->id))->delay(now()->addMinutes(2));
+            dispatch(new SendValidateContenderEmailJob($new_contender->id))->delay(now()->addMinutes(5));
             return response()->json($response,201);
         }
         return response()->json(['message'=>'Not a valid input'],400);
