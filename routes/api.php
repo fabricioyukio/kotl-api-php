@@ -24,4 +24,6 @@ Route::middleware('json.response')->group(function(){
     Route::get('contender/activate/{id}/with/{token}', 'ContenderController@confirm');
     Route::get('contenders', 'ContenderController@get_active');
     Route::get('noncontenders', 'ContenderController@get_inactive');
+
+    Route::post('vote', 'VoteController@register');
 });

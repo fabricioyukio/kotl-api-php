@@ -21,7 +21,8 @@ class CreateContendersTable extends Migration
             $table->enum('gender',['FEMALE','MALE','NOT GIVEN'])->default('NOT GIVEN');
             $table->uuid('token');
             $table->enum('status',['CREATED','ACTIVE','SUSPENDED','CANCELLED'])->default('CREATED');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->unique('email','one_contender_per_email');
             $table->unique('token','one_token_per_email');
             $table->index('token');

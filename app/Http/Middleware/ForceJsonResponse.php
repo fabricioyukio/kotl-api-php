@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ContenderRequest;
+use App\Http\Requests\VoteRequest;
 use Closure;
 
 class ForceJsonResponse

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContenderRequest;
 use App\Contender;
+use App\Vote;
+use App\Election;
 use App\Jobs\SendValidateContenderEmailJob;
 
 
@@ -25,10 +27,10 @@ class ContenderController extends Controller
         }
         if($new_contender){
             $response = [
-                'message'=>'Here comes a new contender!',
+                'message'=>'contender.welcome',
                 'contender'=>$new_contender
             ];
-            dispatch(new SendValidateContenderEmailJob($new_contender->id))->delay(now()->addMinutes(5));
+            dispatch(new SendValidateContenderEmailJob($new_contender->id));
             return response()->json($response,201);
         }
         return response()->json(['message'=>'Not a valid input'],400);
