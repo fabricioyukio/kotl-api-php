@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Election;
+use App\Vote;
+use App\Contender;
+use App\Reign;
 use Carbon\Carbon;
 use App\Jobs\ElectDailyRulerJob;
 
@@ -41,15 +44,16 @@ class CloseDailyElection extends Command
     public function handle()
     {
         $today = Carbon::now();
-        $election = Election::daily()->where('available_at',$today->toDateString())->first();
+        $election = Election::daily()->where('status','OPEN')->first();
         if(is_null($election)){
-
+            echo "\n\nNo open elections found";
         }else{
             $election->status = 'CLOSED';
             $election->ended_at = Carbon::now();
             if($election->save()){
                 echo "\n\nElection for {$today->toDateString()} is now closed!\n\n";
-                dispatch(new ElectDailyRulerJob());
+                dispatch(new ElectDailyRulerJob($election->id));
+                echo "\nDispatched ElectDailyRulerJob";
             }
         }
     }

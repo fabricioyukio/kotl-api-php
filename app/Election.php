@@ -27,4 +27,9 @@ class Election extends Model
     {
         return $query->where('status','OPEN')->orderBy('available_at','asc')->orderBy('id','desc');
     }
+
+    public function scopeClosed($query)
+    {
+        return $query->where('status','CLOSED')->orderBy('ended_at','desc')->orderBy('id','desc');
+    }
 }

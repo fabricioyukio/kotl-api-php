@@ -16,13 +16,14 @@ class CreateReignsTable extends Migration
         Schema::create('reigns', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('election_id');
-            $table->string('king');
-            $table->string('king_avatar');
-            $table->string('arrogator');
-            $table->string('arrogator_avatar');
+            $table->unsignedBigInteger('ruler_id');
             $table->enum('type',['DAY','WEEK']);
+            $table->string('title', 120)->default('Rei do Sudeste');
+            $table->dateTime('from');
+            $table->dateTime('to');
             $table->timestamps();
             $table->foreign('election_id')->references('id')->on('elections');
+            $table->foreign('ruler_id')->references('id')->on('contenders');
         });
     }
 
